@@ -1,0 +1,14 @@
+create table `collection_snippets` (`id` integer primary key autoincrement, `collection_cid` varchar(255), `snippet_cid` varchar(255), `position` integer, `date_modified` date);
+create table sqlite_sequence(name,seq);
+create index `collection_snippets_collection_cid` on `collection_snippets` (`collection_cid`);
+create index `collection_snippets_snippet_cid` on `collection_snippets` (`snippet_cid`);
+create table `collections` (`id` integer primary key autoincrement, `cid` varchar(255), `title` varchar(255), `short_title` varchar(255), `mini_title` varchar(255), `content` text, `description` text, `listed` tinyint(1) not null default 1, `cover` varchar(255), `tokens` text, `ranking` float, `featured_index` integer, `top_level` tinyint(1) not null default 0, `parent_cid` varchar(255));
+create unique index `collections_cid` on `collections` (`cid`);
+create index `collections_parent_cid` on `collections` (`parent_cid`);
+create table `languages` (`id` integer primary key autoincrement, `cid` varchar(255), `long` varchar(255), `short` varchar(255), `name` varchar(255));
+create unique index `languages_cid` on `languages` (`cid`);
+create table `snippets` (`id` integer primary key autoincrement, `cid` varchar(255), `title` varchar(255), `short_title` varchar(255), `content` text, `description` text, `listed` tinyint(1) not null default 1, `cover` varchar(255), `tokens` text, `ranking` float, `tags` varchar(255), `date_modified` date, `table_of_contents` text, `language_cid` varchar(255));
+create unique index `snippets_cid` on `snippets` (`cid`);
+create index `snippets_date_modified` on `snippets` (`date_modified`);
+create index `snippets_language_cid` on `snippets` (`language_cid`);
+create index `snippets_ranking` on `snippets` (`ranking` desc);
