@@ -26,6 +26,7 @@ export const extractLanguageData = async languageGlob => {
 export const exportLanguageData = languageData => {
   return [...languageData.values()].map(lang => {
     return {
+      model: 'Language',
       cid: lang.long,
       long: lang.long,
       short: lang.short,
